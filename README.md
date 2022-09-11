@@ -2,7 +2,7 @@
 
 ## Reference
 
--[YOLO clarification](https://pysource.com/2019/06/27/yolo-object-detection-using-opencv-with-python/)
+- [YOLO clarification](https://pysource.com/2019/06/27/yolo-object-detection-using-opencv-with-python/)
 
 deep learning framework to run YOLO algorythm
 
@@ -27,12 +27,12 @@ Blob is used to extract features fromt he iamge and to resize them.
 416×416 it’s in the middle and you get a bit of both.
 
 <b>Performance Metrics</b>
-<img src="/img/iou.png" height="200" width="300">
-<img src="/img/performance_metrics.jpg" height="150" width="500">
 
--[객체 커스텀](https://velog.io/@kjyggg/Few-Shot-Object-Detection)
+<img src="/img/iou.png" height="150" width="200"> <img src="/img/performance_metrics.jpg" height="150" width="500">
 
--[커스텀 모델](https://blog.mutti.kr/m/160)
+- [객체 커스텀](https://velog.io/@kjyggg/Few-Shot-Object-Detection)
+
+- [커스텀 모델](https://blog.mutti.kr/m/160)
 정확도를 높이는 방법
 클래스당 2000개 이상의 이미지가 필요합니다.
 이미지 속 객체들의 크기, 밝기, 위치, 회전, 배경이 다양할 수록 정확도가 높아집니다.
