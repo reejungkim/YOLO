@@ -26,6 +26,10 @@ Blob is used to extract features fromt he iamge and to resize them.
 609×609 it’s bigger so high accuracy and slow speed
 416×416 it’s in the middle and you get a bit of both.
 
+<b>Performance Metrics</b>
+<img src="/img/iou.png" height="200" width="300">
+<img src="/img/performance_metrics.jpg" height="150" width="500">
+
 -[객체 커스텀](https://velog.io/@kjyggg/Few-Shot-Object-Detection)
 
 -[커스텀 모델](https://blog.mutti.kr/m/160)
