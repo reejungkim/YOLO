@@ -1,4 +1,4 @@
-# YOLO
+# YOLO (You Only Look Once)
 
 ## Reference
 
@@ -29,6 +29,7 @@ Blob is used to extract features fromt he iamge and to resize them.
 - [Performance Metrics](https://blog.paperspace.com/mean-average-precision/)
 
 Intersection over Union (IoU)
+
 <img src="/img/iou.png" height="150" width="200"> <img src="/img/performance_metrics.jpg" height="150" width="500">
 
 mean average precision (mAP)
@@ -37,7 +38,9 @@ mean average precision (mAP)
 
 - [커스텀 모델](https://blog.mutti.kr/m/160)
   정확도를 높이는 방법
-  클래스당 2000개 이상의 이미지가 필요합니다.
+  클래스당 2000개 이상의 이미지가 필요. (at least 100 images recommended)
   이미지 속 객체들의 크기, 밝기, 위치, 회전, 배경이 다양할 수록 정확도가 높아집니다.
   검출하지 않으려는 객체들의 사진도 필요합니다. (이 사진들은 빈 txt 파일을 가져야 합니다.)
   roi 파일이 없는 이미지들의 roi를 파일을 만들어 주는 파이썬 코드를 첨부합니다.
+
+- [Annotation tool used: LabelImg](https://medium.com/nerd-for-tech/labeling-data-for-object-detection-yolo-5a4fa4f05844)
