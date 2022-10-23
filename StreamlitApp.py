@@ -28,7 +28,7 @@ def object_detection_video():
     weights_path = r's\yolov3.weights'
     font_scale = 1
     thickness = 1
-    url = "https://raw.githubusercontent.com/zhoroh/ObjectDetection/master/labels/coconames.txt"
+    url = "https://github.com/reejungkim/YOLO/blob/main/classes.txt"
     f = urllib.request.urlopen(url)
     labels = [line.decode('utf-8').strip() for line in f]
     #f = open(r'C:\Users\Olazaah\Downloads\stream\labels\coconames.txt','r')
