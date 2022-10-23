@@ -6,6 +6,8 @@
 <br></br>
 ## Reference
 
+- [Darknet](https://pjreddie.com/darknet/yolo/)
+
 - [YOLO clarification](https://pysource.com/2019/06/27/yolo-object-detection-using-opencv-with-python/)
 
 deep learning framework to run YOLO algorythm
