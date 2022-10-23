@@ -8,7 +8,7 @@ import os
 #import tensorflow_hub as hub
 import time
 import sys
-from streamlit_embedcode import github_gist
+#from streamlit_embedcode import github_gist
 import urllib.request
 import urllib
 import moviepy.editor as moviepy
