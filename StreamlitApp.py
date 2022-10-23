@@ -175,7 +175,7 @@ def object_detection_image():
         nmsThreshold = st.slider('Threshold', 0, 100, 20)
         #classNames = []
         whT = 320
-        url = "https://raw.githubusercontent.com/zhoroh/ObjectDetection/master/labels/coconames.txt"
+        url = "https://github.com/reejungkim/YOLO/blob/main/classes.txt"
         f = urllib.request.urlopen(url)
         classNames = [line.decode('utf-8').strip() for line in f]
         #f = open(r'C:\Users\Olazaah\Downloads\stream\labels\coconames.txt','r')
@@ -259,7 +259,7 @@ def main():
     
     This YOLO object Detection project can detect 80 objects(i.e classes)
     in either a video or image. The full list of the classes can be found 
-    [here](https://github.com/KaranJagtiani/YOLO-Coco-Dataset-Custom-Classes-Extractor/blob/main/classes.txt)"""
+    [here](https://github.com/reejungkim/YOLO/blob/main/classes.txt)"""
                           )
     st.sidebar.title("Select Activity")
     choice = st.sidebar.selectbox(
