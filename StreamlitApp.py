@@ -24,8 +24,8 @@ def object_detection_video():
     CONFIDENCE = 0.5
     SCORE_THRESHOLD = 0.5
     IOU_THRESHOLD = 0.5
-    config_path = r'\yolov3.cfg'
-    weights_path = r'\yolov3.weights'
+    config_path = r'yolov3.cfg'
+    weights_path = r'yolov3.weights'
     font_scale = 1
     thickness = 1
     url = "https://github.com/reejungkim/YOLO/blob/main/classes.txt"
