@@ -177,7 +177,7 @@ def object_detection_image():
         nmsThreshold = st.slider('Threshold', 0, 100, 20)
         #classNames = []
         whT = 320
-        url = "https://github.com/reejungkim/YOLO/blob/main/classes.txt"
+        url = "https://raw.githubusercontent.com/reejungkim/YOLO/main/classes.txt"
         f = urllib.request.urlopen(url)
         classNames = [line.decode('utf-8').strip() for line in f]
         #f = open(r'C:\Users\Olazaah\Downloads\stream\labels\coconames.txt','r')
@@ -221,7 +221,7 @@ def object_detection_image():
                 obj_list.append(classNames[classIds[i]].upper())
 
                 confi_list.append(int(confs[i]*100))
-                cv2.putText(img2, f'{classNames} {int(confs[i]*100)}%',
+                cv2.putText(img2, f'{classNames[classIds[i]].upper()} {int(confs[i]*100)}%',
                             (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (240, 0, 240), 2)
             df = pd.DataFrame(list(zip(obj_list, confi_list)),
                               columns=['Object Name', 'Confidence'])
