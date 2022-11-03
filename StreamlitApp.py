@@ -147,7 +147,8 @@ def object_detection_video():
                                     fontScale=font_scale, color=(0, 0, 0), thickness=thickness)
 
                 out.write(image)
-                cv2.imshow("image", image)
+                #st.image(imgage, caption='Proccesed Video.')
+                #cv2.imshow("image", image)
 
                 if ord("q") == cv2.waitKey(1):
                     break
