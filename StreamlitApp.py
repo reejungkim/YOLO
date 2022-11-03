@@ -29,7 +29,7 @@ def object_detection_video():
     weights_path = 'yolov3.weights'
     font_scale = 1
     thickness = 1
-    url = "https://github.com/reejungkim/YOLO/blob/main/classes.txt"
+    url = "https://raw.githubusercontent.com/reejungkim/YOLO/main/yolo.names"
     f = urllib.request.urlopen(url)
     labels = [line.decode('utf-8').strip() for line in f]
     #f = open(r'C:\Users\Olazaah\Downloads\stream\labels\coconames.txt','r')
@@ -177,7 +177,7 @@ def object_detection_image():
         nmsThreshold = st.slider('Threshold', 0, 100, 20)
         #classNames = []
         whT = 320
-        url = "https://raw.githubusercontent.com/reejungkim/YOLO/main/classes.txt"
+        url = "https://raw.githubusercontent.com/reejungkim/YOLO/main/yolo.names"
         f = urllib.request.urlopen(url)
         classNames = [line.decode('utf-8').strip() for line in f]
         #f = open(r'C:\Users\Olazaah\Downloads\stream\labels\coconames.txt','r')
