@@ -101,6 +101,9 @@ def object_detection_image():
 
         st.image(img2, caption='Proccesed Image.')
 
+        import matplotlib.pyplot as plt
+        img = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)
+        plt.imshow( img )
         #cv2.waitKey(0)
 
         #cv2.destroyAllWindows()
