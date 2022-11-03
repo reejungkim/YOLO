@@ -23,8 +23,8 @@ def object_detection_video():
     CONFIDENCE = 0.5
     SCORE_THRESHOLD = 0.5
     IOU_THRESHOLD = 0.5
-    config_path = r'/yolov3.cfg'
-    weights_path = r'/yolov3.weights'
+    config_path = 'yolov3.cfg'
+    weights_path = 'yolov3.weights'
     font_scale = 1
     thickness = 1
     url = "https://github.com/reejungkim/YOLO/blob/main/classes.txt"
@@ -180,11 +180,11 @@ def object_detection_image():
         #f = open(r'C:\Users\Olazaah\Downloads\stream\labels\coconames.txt','r')
         #lines = f.readlines()
         #classNames = [line.strip() for line in lines]
-        config_path = r'/yolov3.cfg'
-        weights_path = r'/yolov3.weights'
+        config_path = 'yolov3.cfg'
+        weights_path = 'yolov3.weights'
         net = cv2.dnn.readNetFromDarknet(config_path, weights_path)
         net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
-        net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
+        net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU) #CPU로 세팅
 
         def findObjects(outputs, img):
             hT, wT, cT = img2.shape
