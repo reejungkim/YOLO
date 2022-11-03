@@ -221,7 +221,7 @@ def object_detection_image():
                 obj_list.append(classNames[classIds[i]].upper())
 
                 confi_list.append(int(confs[i]*100))
-                cv2.putText(img2, f'{classNames[classIds[i]].upper()} {int(confs[i]*100)}%',
+                cv2.putText(img2, f'{classNames} {int(confs[i]*100)}%',
                             (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (240, 0, 240), 2)
             df = pd.DataFrame(list(zip(obj_list, confi_list)),
                               columns=['Object Name', 'Confidence'])
