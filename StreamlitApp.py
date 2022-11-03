@@ -17,8 +17,7 @@ import time
 import sys
 
 
-<<<<<<< HEAD
-=======
+
 
 def object_detection_video():
     #object_detection_video.has_beenCalled = True
