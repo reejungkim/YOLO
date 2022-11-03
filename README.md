@@ -4,6 +4,12 @@
 [![Linkedin Badge](https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=www.linkedin.com/in/reejungkim/)](https://www.linkedin.com/in/reejungkim/) 
 [![Git page](http://img.shields.io/badge/-Portfolio-black?style=flat-square&logo=github&link=https://reejungkim.github.io/)](https://reejungkim.github.io/)
 <br></br>
+
+## App for object detection :  [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://reejungkim-yolo-streamlitapp-09dt9a.streamlit.app)
+
+<!--  ![](https://github.com/reejungkim/YOLO/blob/main/assets/app.gif). -->
+<img src="/assets/app.gif" width="300" height="500"/>
+
 ## Reference
 
 - [Darknet](https://pjreddie.com/darknet/yolo/)
