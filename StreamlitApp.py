@@ -226,11 +226,7 @@ def object_detection_image():
                             (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (240, 0, 240), 2)
             df = pd.DataFrame(list(zip(obj_list, confi_list)),
                               columns=['Object Name', 'Confidence'])
-<<<<<<< HEAD
-
-=======
             st.write(df)
->>>>>>> 3ba1571 (add writing df)
 
         blob = cv2.dnn.blobFromImage(
             img2, 1 / 255, (whT, whT), [0, 0, 0], 1, crop=False)
@@ -242,10 +238,6 @@ def object_detection_image():
 
         st.image(img2, caption='Proccesed Image.')
 
-<<<<<<< HEAD
-      
-=======
->>>>>>> 3ba1571 (add writing df)
         #cv2.waitKey(0)
 
         #cv2.destroyAllWindows()
