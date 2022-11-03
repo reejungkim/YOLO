@@ -83,13 +83,7 @@ def object_detection_image():
                             (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 1, (240, 0, 240), 2)
             df = pd.DataFrame(list(zip(obj_list, confi_list)),
                               columns=['Object Name', 'Confidence'])
-            if st.checkbox("Show Object's list"):
 
-                st.write(df)
-            if st.checkbox("Show Confidence bar chart"):
-                st.subheader('Bar chart for confidence levels')
-
-                st.bar_chart(df["Confidence"])
 
         blob = cv2.dnn.blobFromImage(
             img2, 1 / 255, (whT, whT), [0, 0, 0], 1, crop=False)
@@ -101,9 +95,7 @@ def object_detection_image():
 
         st.image(img2, caption='Proccesed Image.')
 
-        import matplotlib.pyplot as plt
-        img = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)
-        plt.imshow( img )
+      
         #cv2.waitKey(0)
 
         #cv2.destroyAllWindows()
