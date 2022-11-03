@@ -159,7 +159,7 @@ def object_detection_video():
 
         cap.release()
         cv2.destroyAllWindows()
->>>>>>> 3ba1571 (add writing df)
+
 
 
 def object_detection_image():
