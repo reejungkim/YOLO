@@ -150,10 +150,10 @@ def object_detection_video():
                 #st.image(imgage, caption='Proccesed Video.')
                 #cv2.imshow("image", image)
 
-                if ord("q") == cv2.waitKey(1):
-                    break
-            else:
-                break
+                #if ord("q") == cv2.waitKey(1):
+                #    break
+            #else:
+            #    break
 
         # return "detected_video.mp4"
 
