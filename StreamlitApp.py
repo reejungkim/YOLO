@@ -65,7 +65,7 @@ def object_detection_video():
         # out = cv2.VideoWriter(output_name, cv2.VideoWriter_fourcc#(*'avc3'), fps, insize)
 
         fourcc = cv2.VideoWriter_fourcc(*'mpv4')
-        out = cv2.VideoWriter("detected_video.mp4", fourcc, 20.0, (w, h))
+        out = cv2.VideoWriter("detected_video.mp4", fourcc, 20.0, (w, h)) #비디오 불러와서 저장 
         count = 0
         while True:
             _, image = cap.read()
@@ -77,7 +77,7 @@ def object_detection_video():
                 start = time.perf_counter()
                 layer_outputs = net.forward(ln)
                 time_took = time.perf_counter() - start
-                count += 60
+                count += 1
                 print(f"Time took: {count}", time_took)
                 boxes, confidences, class_ids = [], [], []
 
@@ -147,20 +147,42 @@ def object_detection_video():
                                     fontScale=font_scale, color=(0, 0, 0), thickness=thickness)
 
                 out.write(image)
-                st.image(image, caption='Proccesed Video.')
-                #cv2.imshow("image", image)
+                #st.image(image, caption='Proccesed Video.')
+                cv2.imshow("image", image)
 
-                #if ord("q") == cv2.waitKey(1):
-                #    break
-            #else:
-            #    break
+                if ord("q") == cv2.waitKey(1):
+                    break
+                else:
+                    break
 
         # return "detected_video.mp4"
-
-        cap.release()
+        out.release() #비디오 캡쳐 닫기 
+        cap.release() #파일 닫아주기
         cv2.destroyAllWindows()
 
-
+"""
+The Function below oracestrates the entire operation and performs the real-time parsing for video stream.
+"""
+def __call__(self):
+    player = self.get_video_stream() #Get your video stream.
+    assert player.isOpened() # Make sure that their is a stream. 
+    #Below code creates a new video writer object to write our
+    #output stream.
+    x_shape = int(player.get(cv2.CAP_PROP_FRAME_WIDTH))
+    y_shape = int(player.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    four_cc = cv2.VideoWriter_fourcc(*"MJPG") #Using MJPEG codex
+    out = cv2.VideoWriter(out_file, four_cc, 20, \
+                          (x_shape, y_shape)) 
+    ret, frame = player.read() # Read the first frame.
+    while rect: # Run until stream is out of frames
+        start_time = time() # We would like to measure the FPS.
+        results = self.score_frame(frame) # Score the Frame
+        frame = self.plot_boxes(results, frame) # Plot the boxes.
+        end_time = time()
+        fps = 1/np.round(end_time - start_time, 3) #Measure the FPS.
+        print(f"Frames Per Second : {fps}")
+        out.write(frame) # Write the frame onto the output.
+        ret, frame = player.read() # Read next frame.
 
 def object_detection_image():
     st.title('Object Detection for Images')
