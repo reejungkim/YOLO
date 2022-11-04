@@ -77,7 +77,7 @@ def object_detection_video():
                 start = time.perf_counter()
                 layer_outputs = net.forward(ln)
                 time_took = time.perf_counter() - start
-                count += 1
+                count += 60
                 print(f"Time took: {count}", time_took)
                 boxes, confidences, class_ids = [], [], []
 
