@@ -250,12 +250,8 @@ def main():
 
     read_me = st.markdown("""
     This project was built using Streamlit and OpenCV 
-    to demonstrate YOLO Object detection in both videos(pre-recorded)
-    and images.
-    
-    
-    This YOLO object Detection project can detect 80 objects(i.e classes)
-    in either a video or image. The full list of the classes can be found 
+    to demonstrate YOLO Object detection.
+    The full list of the classes that are trained to be detected can be found 
     [here](https://github.com/reejungkim/YOLO/blob/main/classes.txt)"""
                           )
     st.sidebar.title("Select Activity")
