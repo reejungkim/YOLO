@@ -25,7 +25,7 @@ def object_detection_video():
     CONFIDENCE = 0.5
     SCORE_THRESHOLD = 0.5
     IOU_THRESHOLD = 0.5
-    config_path = 'yolov3.cfg'
+    config_path = 'yolov5s.pt'#'yolov3.cfg'
     weights_path = 'yolov3.weights'
     font_scale = 1
     thickness = 1
@@ -184,7 +184,7 @@ def object_detection_image():
         #f = open(r'C:\Users\Olazaah\Downloads\stream\labels\coconames.txt','r')
         #lines = f.readlines()
         #classNames = [line.strip() for line in lines]
-        config_path = 'yolov3.cfg'
+        config_path =  'yolov5s.pt' #'yolov3.cfg'
         weights_path = 'yolov3.weights'
         net = cv2.dnn.readNetFromDarknet(config_path, weights_path)
         net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
