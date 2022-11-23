@@ -165,7 +165,8 @@ def object_detection_video():
 def object_detection_image():
     st.title('Object Detection for Images')
     st.subheader("""
-    This object detection project takes in an image and outputs the image with bounding boxes created around the objects in the image
+    This object detection project takes in an image and outputs the image with bounding boxes created around the objects in the image.
+    The full list of the classes that are trained to be detected can be found [here](https://github.com/reejungkim/YOLO/blob/main/classes.txt)
     """)
     file = st.file_uploader('Upload Image', type=['jpg', 'png', 'jpeg'])
     if file != None:
