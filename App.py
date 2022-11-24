@@ -186,7 +186,7 @@ def object_detection_image():
         #lines = f.readlines()
         #classNames = [line.strip() for line in lines]
         config_path =  'yolov3.cfg'
-        weights_path = 'https://pjreddie.com/media/files/yolov3.weights' #'yolov3.weights'
+        weights_path = 'wget https://pjreddie.com/media/files/yolov3.weights' #'yolov3.weights'
         net = cv2.dnn.readNetFromDarknet(config_path, weights_path)
         net.setPreferableBackend(cv2.dnn.DNN_BACKEND_OPENCV)
         net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU) #CPU로 세팅
