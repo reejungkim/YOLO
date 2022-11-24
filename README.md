@@ -16,7 +16,7 @@
 
 - [YOLO clarification](https://pysource.com/2019/06/27/yolo-object-detection-using-opencv-with-python/)
 
-deep learning framework to run YOLO algorythm
+deep learning framework to run YOLO algorithm
 
 1. Darknet : it’s the framework built from the developer of YOLO and made specifically for yolo.
    Advantage: it’s fast, it can work with GPU or CPU
@@ -29,8 +29,10 @@ deep learning framework to run YOLO algorythm
    Disadvantage: it only works with CPU, so you can’t get really high speed to process videos in real time.
 
 <b>weight file</b>: trained model.
-<b>cfg file</b>: configuration file where settings of the algorythm are presented
-<b>name files</b>: name of the objets that the alorythm can detect.
+
+<b>cfg file</b>: configuration file where settings of the algorithm are presented
+
+<b>name files</b>: name of the objets that the alorithm can detect.
 
 YOLO accepts three sizes of image:
 Blob is used to extract features fromt he iamge and to resize them.
