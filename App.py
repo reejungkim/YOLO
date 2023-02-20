@@ -159,6 +159,12 @@ def object_detection_video():
 
         cap.release()
         cv2.destroyAllWindows()
+        
+
+#Reading from WebCam
+def obejct_detection_web():
+    cam_feed = cv2.VideoCapture(0) #create a opencv video stream.
+    
 
 
 
@@ -308,7 +314,7 @@ def main():
                           )
     st.sidebar.title("Select Activity")
     choice = st.sidebar.selectbox(
-        "MODE", ("About", "Object Detection(Image)", "Object Detection(Video)"))
+        "MODE", ("About", "Object Detection(Image)", "Object Detection(Video)", "Object Detection(WebCam)"))
     # ["Show Instruction","Landmark identification","Show the #source code", "About"]
 
     if choice == "Object Detection(Image)":
@@ -333,6 +339,10 @@ def main():
             st.write("Detected Video")
         except OSError:
             ''
+    elif choice == "Object Detection(WebCam)":
+        read_me_0.empty()
+        read_me.empty()
+        obejct_detection_web
 
     elif choice == "About":
         print()
