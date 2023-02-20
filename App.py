@@ -342,7 +342,7 @@ def main():
     elif choice == "Object Detection(WebCam)":
         read_me_0.empty()
         read_me.empty()
-        obejct_detection_web
+        obejct_detection_web()
 
     elif choice == "About":
         print()
