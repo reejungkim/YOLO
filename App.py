@@ -163,8 +163,23 @@ def object_detection_video():
 
 #Reading from WebCam
 def obejct_detection_web():
-    cam_feed = cv2.VideoCapture(0) #create a opencv video stream.
+    webcam = cv2.VideoCapture(0) #create a opencv video stream.
     
+    if not webcam.isOpened():
+        print("Could not open webcam")
+    exit()
+
+    while webcam.isOpened():
+        status, frame = webcam.read()
+
+        if status:
+            cv2.imshow("test", frame)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    webcam.release()
+    cv2.destroyAllWindows()
 
 
 
