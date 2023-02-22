@@ -170,6 +170,7 @@ def obejct_detection_web():
     while True:
         ## read frames
         ret, img = cam.read()
+        st.video(img )
         cv2.imshow("Cam Viewer",img) # 불러온 이미지 출력하기
         if cv2.waitKey(1) == 27:
             break  # esc to quit
