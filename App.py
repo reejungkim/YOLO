@@ -169,12 +169,12 @@ def obejct_detection_web():
 #cam.set(5,0) #CV_CAP_PROP_FPS
     while True:
         ## read frames
-    ret, img = cam.read()
-    cv2.imshow("Cam Viewer",img) # 불러온 이미지 출력하기
-    if cv2.waitKey(1) == 27:
-        break  # esc to quit
-    cam.release()
-    cv2.destroyAllWindows()
+        ret, img = cam.read()
+        cv2.imshow("Cam Viewer",img) # 불러온 이미지 출력하기
+        if cv2.waitKey(1) == 27:
+            break  # esc to quit
+        cam.release()
+        cv2.destroyAllWindows()
 
 
 
