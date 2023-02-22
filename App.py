@@ -163,7 +163,8 @@ def object_detection_video():
 
 #Reading from WebCam
 def obejct_detection_web():
-    cam = cv2.VideoCapture(0) #0=front-cam, 1=back-cam
+    #cam = cv2.VideoCapture(0) #0=front-cam, 1=back-cam
+    cam = st.camera_input("Take a picture")
     cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1300)
     cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 1500)
 #cam.set(5,0) #CV_CAP_PROP_FPS
@@ -171,11 +172,11 @@ def obejct_detection_web():
         ## read frames
         ret, img = cam.read()
         st.video(img )
-        cv2.imshow("Cam Viewer",img) # 불러온 이미지 출력하기
-        if cv2.waitKey(1) == 27:
-            break  # esc to quit
-        cam.release()
-        cv2.destroyAllWindows()
+        #cv2.imshow("Cam Viewer",img) # 불러온 이미지 출력하기
+        #if cv2.waitKey(1) == 27:
+        #    break  # esc to quit
+        #cam.release()
+        #cv2.destroyAllWindows()
 
 
 
