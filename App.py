@@ -165,8 +165,9 @@ def object_detection_video():
 def obejct_detection_web():
     #cam = cv2.VideoCapture(0) #0=front-cam, 1=back-cam
     cam = st.camera_input("Take a picture")
-    cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1300)
-    cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 1500)
+#    cam = cv2.VideoCapture(vid)
+#    cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1300)
+#    cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 1500)
 #cam.set(5,0) #CV_CAP_PROP_FPS
     while True:
         ## read frames
@@ -186,7 +187,14 @@ def object_detection_image():
     This object detection project takes in an image and outputs the image with bounding boxes created around the objects in the image.
     The full list of the classes that are trained to be detected can be found [here](https://github.com/reejungkim/YOLO/blob/main/classes.txt)
     """)
-    file = st.file_uploader('Upload Image', type=['jpg', 'png', 'jpeg'])
+    option= st.selectbox(
+    'Would you like to upload an image or take a photo?',
+    ('upload existing image', 'take a photo from webcam'))
+    
+    if option == 'upload existing image':
+        file = st.file_uploader('Upload Image', type=['jpg', 'png', 'jpeg'])
+    elif option =='take a photo from webcam':
+        file = st.camera_input("Take a picture")
     if file != None:
         img1 = Image.open(file)
         img2 = np.array(img1)
