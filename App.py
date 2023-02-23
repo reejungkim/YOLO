@@ -16,6 +16,8 @@ import numpy as np
 import time
 import sys
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
+import av 
+import mediapipe as mp
 
 
 
@@ -185,8 +187,7 @@ def obejct_detection_webcam():
     ln = net.getLayerNames()
     ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()] 
 
-    cam = st.camera_input("Take a picture")
-
+    #cam = st.camera_input("Take a picture")
     #while True:
     #    ## read frames
     #    ret, img = cam.read()

@@ -7,4 +7,5 @@ python-dotenv
 #cv2==4.6.0
 opencv-python-headless==4.5.4.60
 moviepy
-streamlit_webrtc   
+streamlit_webrtc       
+mediapipe==0.8.9.1
