@@ -15,6 +15,7 @@ import moviepy.editor as moviepy
 import numpy as np
 import time
 import sys
+from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
 
 
 
@@ -162,23 +163,65 @@ def object_detection_video():
         
 
 #Reading from WebCam
-def obejct_detection_web():
-    #cam = cv2.VideoCapture(0) #0=front-cam, 1=back-cam
-    cam = st.camera_input("Take a picture")
-#    cam = cv2.VideoCapture(vid)
-#    cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1300)
-#    cam.set(cv2.CAP_PROP_FRAME_HEIGHT, 1500)
-#cam.set(5,0) #CV_CAP_PROP_FPS
-    while True:
-        ## read frames
-        ret, img = cam.read()
-        st.video(img )
-        #cv2.imshow("Cam Viewer",img) # 불러온 이미지 출력하기
-        #if cv2.waitKey(1) == 27:
-        #    break  # esc to quit
-        #cam.release()
-        #cv2.destroyAllWindows()
+def obejct_detection_webcam():
+    # pass
+    CONFIDENCE = 0.5
+    SCORE_THRESHOLD = 0.5
+    IOU_THRESHOLD = 0.5
+    config_path = 'yolov3.cfg'
+    weights_path = 'yolov3.weights'
+    font_scale = 1
+    thickness = 1
+    url = "https://raw.githubusercontent.com/reejungkim/YOLO/main/yolo.names"
+    f = urllib.request.urlopen(url)
+    labels = [line.decode('utf-8').strip() for line in f]
+    #f = open(r'C:\Users\Olazaah\Downloads\stream\labels\coconames.txt','r')
+    #lines = f.readlines()
+    #labels = [line.strip() for line in lines]
+    colors = np.random.randint(0, 255, size=(len(labels), 3), dtype="uint8")
 
+    net = cv2.dnn.readNetFromDarknet(config_path, weights_path)
+
+    ln = net.getLayerNames()
+    ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()] 
+
+    cam = st.camera_input("Take a picture")
+
+    #while True:
+    #    ## read frames
+    #    ret, img = cam.read()
+    #    st.video(img )
+
+
+
+    RTC_CONFIGURATION = RTCConfiguration(
+        {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
+    )
+
+
+    class VideoProcessor:
+        def recv(self, frame):
+            img = frame.to_ndarray(format="bgr24")
+            
+            # vision processing
+            flipped = img[:, ::-1, :]
+
+            # model processing
+            im_pil = Image.fromarray(flipped)
+            results = st.model(im_pil, size=112)
+            bbox_img = np.array(results.render()[0])
+
+            return av.VideoFrame.from_ndarray(bbox_img, format="bgr24")
+
+
+    webrtc_ctx = webrtc_streamer(
+        key="WYH",
+        mode=WebRtcMode.SENDRECV,
+        rtc_configuration=RTC_CONFIGURATION,
+        video_processor_factory=VideoProcessor,
+        media_stream_constraints={"video": True, "audio": False},
+        async_processing=False,
+    )
 
 
 def object_detection_image():
@@ -323,7 +366,7 @@ class WeightReader:
 
 
 def main():
-    new_title = '<p style="font-size: 42px;">Welcome to my Object Detection App!</p>'
+    new_title = '<p style="font-size: 42px;">Object Detection</p>'
     read_me_0 = st.markdown(new_title, unsafe_allow_html=True)
 
     read_me = st.markdown("""
@@ -362,7 +405,7 @@ def main():
     elif choice == "Object Detection(WebCam)":
         read_me_0.empty()
         read_me.empty()
-        obejct_detection_web()
+        obejct_detection_webcam()
 
     elif choice == "About":
         print()
