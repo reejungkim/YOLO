@@ -17,7 +17,7 @@ import time
 import sys
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
 import av 
-import mediapipe as mp
+#import mediapipe as mp
 
 
 
@@ -192,13 +192,9 @@ def obejct_detection_webcam():
     #    ## read frames
     #    ret, img = cam.read()
     #    st.video(img )
-
-
-
     RTC_CONFIGURATION = RTCConfiguration(
         {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
     )
-
 
     class VideoProcessor:
         def recv(self, frame):
@@ -221,7 +217,7 @@ def obejct_detection_webcam():
         rtc_configuration=RTC_CONFIGURATION,
         video_processor_factory=VideoProcessor,
         media_stream_constraints={"video": True, "audio": False},
-        async_processing=False,
+        async_processing=True,
     )
 
 
