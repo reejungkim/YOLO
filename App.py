@@ -167,81 +167,29 @@ def object_detection_video():
 
 #Reading from WebCam
 def obejct_detection_webcam():
-    # pass
-    CONFIDENCE = 0.5
-    SCORE_THRESHOLD = 0.5
-    IOU_THRESHOLD = 0.5
-    config_path = 'yolov3.cfg'
-    weights_path = 'yolov3.weights'
-    font_scale = 1
-    thickness = 1
-    url = "https://raw.githubusercontent.com/reejungkim/YOLO/main/yolo.names"
-    f = urllib.request.urlopen(url)
-    labels = [line.decode('utf-8').strip() for line in f]
-    #f = open(r'C:\Users\Olazaah\Downloads\stream\labels\coconames.txt','r')
-    #lines = f.readlines()
-    #labels = [line.strip() for line in lines]
-    colors = np.random.randint(0, 255, size=(len(labels), 3), dtype="uint8")
-
-    net = cv2.dnn.readNetFromDarknet(config_path, weights_path)
-
-    ln = net.getLayerNames()
-    ln = [ln[i - 1] for i in net.getUnconnectedOutLayers()] 
-
-    #cam = st.camera_input("Take a picture")
-    #while True:
-    #    ## read frames
-    #    ret, img = cam.read()
-    #    st.video(img )
-    RTC_CONFIGURATION = RTCConfiguration(
-        {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
-    )
-
-
-
+    
+    result_queue = (queue.Queue())  # TODO: A general-purpose shared state object may be more useful.
     def callback(frame: av.VideoFrame) -> av.VideoFrame:
-        img = frame.to_ndarray(format="bgr24")
+        image = frame.to_ndarray(format="bgr24")
+        blob = cv2.dnn.blobFromImage(
+            cv2.resize(image, (300, 300)), 0.007843, (300, 300), 127.5
+        )
+        net.setInput(blob)
+        detections = net.forward()
+        annotated_image, result = _annotate_image(image, detections)
 
-        if _type == "noop":
-            pass
-        elif _type == "cartoon":
-            # prepare color
-            img_color = cv2.pyrDown(cv2.pyrDown(img))
-            for _ in range(6):
-                img_color = cv2.bilateralFilter(img_color, 9, 9, 7)
-            img_color = cv2.pyrUp(cv2.pyrUp(img_color))
+        # NOTE: This `recv` method is called in another thread,
+        # so it must be thread-safe.
+        result_queue.put(result)  # TODO:
 
-            # prepare edges
-            img_edges = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
-            img_edges = cv2.adaptiveThreshold(
-                cv2.medianBlur(img_edges, 7),
-                255,
-                cv2.ADAPTIVE_THRESH_MEAN_C,
-                cv2.THRESH_BINARY,
-                9,
-                2,
-            )
-            img_edges = cv2.cvtColor(img_edges, cv2.COLOR_GRAY2RGB)
+        return av.VideoFrame.from_ndarray(annotated_image, format="bgr24")
 
-            # combine color and edges
-            img = cv2.bitwise_and(img_color, img_edges)
-        elif _type == "edges":
-            # perform edge detection
-            img = cv2.cvtColor(cv2.Canny(img, 100, 200), cv2.COLOR_GRAY2BGR)
-        elif _type == "rotate":
-            # rotate image
-            rows, cols, _ = img.shape
-            M = cv2.getRotationMatrix2D((cols / 2, rows / 2), frame.time * 45, 1)
-            img = cv2.warpAffine(img, M, (cols, rows))
-
-        return av.VideoFrame.from_ndarray(img, format="bgr24")
-
+    RTC_CONFIGURATION = RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]})
     webrtc_ctx = webrtc_streamer(
-        key="WYH",
+        key="object-detection",
         mode=WebRtcMode.SENDRECV,
         rtc_configuration=RTC_CONFIGURATION,
         video_frame_callback=callback,
-        #video_processor_factory=  VideoProcessor,
         media_stream_constraints={"video": True, "audio": False},
         async_processing=True,
     )
