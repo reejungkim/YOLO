@@ -167,22 +167,6 @@ def object_detection_video():
 
 #Reading from WebCam
 def obejct_detection_webcam():
-    
-    result_queue = (queue.Queue())  # TODO: A general-purpose shared state object may be more useful.
-    def callback(frame: av.VideoFrame) -> av.VideoFrame:
-        image = frame.to_ndarray(format="bgr24")
-        blob = cv2.dnn.blobFromImage(
-            cv2.resize(image, (300, 300)), 0.007843, (300, 300), 127.5
-        )
-        net.setInput(blob)
-        detections = net.forward()
-        annotated_image, result = _annotate_image(image, detections)
-
-        # NOTE: This `recv` method is called in another thread,
-        # so it must be thread-safe.
-        result_queue.put(result)  # TODO:
-
-        return av.VideoFrame.from_ndarray(annotated_image, format="bgr24")
 
     RTC_CONFIGURATION = RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]})
     webrtc_ctx = webrtc_streamer(
