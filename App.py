@@ -18,6 +18,7 @@ import sys
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
 import av 
 #import mediapipe as mp
+import queue 
 
 
 
@@ -211,11 +212,27 @@ def obejct_detection_webcam():
             return av.VideoFrame.from_ndarray(bbox_img, format="bgr24")
 
 
+        result_queue = (queue.Queue()) 
+        def callback(frame: av.VideoFrame) -> av.VideoFrame:
+            image = frame.to_ndarray(format="bgr24")
+            blob = cv2.dnn.blobFromImage(
+                cv2.resize(image, (300, 300)), 0.007843, (300, 300), 127.5
+            )
+            net.setInput(blob)
+            detections = net.forward()
+            annotated_image, result = _annotate_image(image, detections)
+
+            # NOTE: This `recv` method is called in another thread,
+            # so it must be thread-safe.
+            result_queue.put(result)  # TODO:
+
+            return av.VideoFrame.from_ndarray(annotated_image, format="bgr24")
+
     webrtc_ctx = webrtc_streamer(
         key="WYH",
         mode=WebRtcMode.SENDRECV,
         rtc_configuration=RTC_CONFIGURATION,
-        video_processor_factory=VideoProcessor,
+        video_processor_factory= callback, #VideoProcessor,
         media_stream_constraints={"video": True, "audio": False},
         async_processing=True,
     )
