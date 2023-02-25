@@ -17,7 +17,7 @@ import time
 import sys
 from streamlit_webrtc import webrtc_streamer, WebRtcMode, RTCConfiguration
 import av 
-import mediapipe as mp
+#import mediapipe as mp
 import queue 
 
 
