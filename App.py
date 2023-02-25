@@ -197,42 +197,51 @@ def obejct_detection_webcam():
         {"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]}
     )
 
-    class VideoProcessor:
-        def recv(self, frame):
-            img = frame.to_ndarray(format="bgr24")
-            
-            # vision processing
-            flipped = img[:, ::-1, :]
-
-            # model processing
-            im_pil = Image.fromarray(flipped)
-            results = st.model(im_pil, size=112)
-            bbox_img = np.array(results.render()[0])
-
-            return av.VideoFrame.from_ndarray(bbox_img, format="bgr24")
 
 
-        result_queue = (queue.Queue()) 
-        def callback(frame: av.VideoFrame) -> av.VideoFrame:
-            image = frame.to_ndarray(format="bgr24")
-            blob = cv2.dnn.blobFromImage(
-                cv2.resize(image, (300, 300)), 0.007843, (300, 300), 127.5
+    def callback(frame: av.VideoFrame) -> av.VideoFrame:
+        img = frame.to_ndarray(format="bgr24")
+
+        if _type == "noop":
+            pass
+        elif _type == "cartoon":
+            # prepare color
+            img_color = cv2.pyrDown(cv2.pyrDown(img))
+            for _ in range(6):
+                img_color = cv2.bilateralFilter(img_color, 9, 9, 7)
+            img_color = cv2.pyrUp(cv2.pyrUp(img_color))
+
+            # prepare edges
+            img_edges = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
+            img_edges = cv2.adaptiveThreshold(
+                cv2.medianBlur(img_edges, 7),
+                255,
+                cv2.ADAPTIVE_THRESH_MEAN_C,
+                cv2.THRESH_BINARY,
+                9,
+                2,
             )
-            net.setInput(blob)
-            detections = net.forward()
-            annotated_image, result = _annotate_image(image, detections)
+            img_edges = cv2.cvtColor(img_edges, cv2.COLOR_GRAY2RGB)
 
-            # NOTE: This `recv` method is called in another thread,
-            # so it must be thread-safe.
-            result_queue.put(result)  # TODO:
+            # combine color and edges
+            img = cv2.bitwise_and(img_color, img_edges)
+        elif _type == "edges":
+            # perform edge detection
+            img = cv2.cvtColor(cv2.Canny(img, 100, 200), cv2.COLOR_GRAY2BGR)
+        elif _type == "rotate":
+            # rotate image
+            rows, cols, _ = img.shape
+            M = cv2.getRotationMatrix2D((cols / 2, rows / 2), frame.time * 45, 1)
+            img = cv2.warpAffine(img, M, (cols, rows))
 
-            return av.VideoFrame.from_ndarray(annotated_image, format="bgr24")
+        return av.VideoFrame.from_ndarray(img, format="bgr24")
 
     webrtc_ctx = webrtc_streamer(
         key="WYH",
         mode=WebRtcMode.SENDRECV,
         rtc_configuration=RTC_CONFIGURATION,
-        video_processor_factory= callback, #VideoProcessor,
+        video_frame_callback=callback,
+        #video_processor_factory=  VideoProcessor,
         media_stream_constraints={"video": True, "audio": False},
         async_processing=True,
     )
