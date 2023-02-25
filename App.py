@@ -168,12 +168,13 @@ def object_detection_video():
 #Reading from WebCam
 def obejct_detection_webcam():
 
+    
     RTC_CONFIGURATION = RTCConfiguration({"iceServers": [{"urls": ["stun:stun.l.google.com:19302"]}]})
     webrtc_ctx = webrtc_streamer(
         key="object-detection",
         mode=WebRtcMode.SENDRECV,
         rtc_configuration=RTC_CONFIGURATION,
-        video_frame_callback=callback,
+        #video_frame_callback=callback,
         media_stream_constraints={"video": True, "audio": False},
         async_processing=True,
     )
