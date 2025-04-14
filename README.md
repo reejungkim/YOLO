@@ -11,13 +11,17 @@
 <!--  ![](https://github.com/reejungkim/YOLO/blob/main/assets/app.gif). -->
 <img src="/assets/app.gif" width="300" height="500"/>
 
+## Used Technologies
+- streamlit
+- yolo
+
 ## Reference
 
 - [Darknet](https://pjreddie.com/darknet/yolo/)
 
 - [YOLO clarification](https://pysource.com/2019/06/27/yolo-object-detection-using-opencv-with-python/)
 
-deep learning framework to run YOLO algorythm
+deep learning framework to run YOLO algorithm
 
 1. Darknet : it’s the framework built from the developer of YOLO and made specifically for yolo.
    Advantage: it’s fast, it can work with GPU or CPU
