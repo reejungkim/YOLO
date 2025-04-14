@@ -5,7 +5,8 @@
 [![Git page](http://img.shields.io/badge/-Portfolio-black?style=flat-square&logo=github&link=https://reejungkim.github.io/)](https://reejungkim.github.io/)
 <br></br>
 
-## App for object detection :  [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://reejungkim-yolo-streamlitapp-09dt9a.streamlit.app)
+## Conformation overview 
+<!-- App for object detection :  [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://reejungkim-yolo-streamlitapp-09dt9a.streamlit.app)-->
 
 <!--  ![](https://github.com/reejungkim/YOLO/blob/main/assets/app.gif). -->
 <img src="/assets/app.gif" width="300" height="500"/>
